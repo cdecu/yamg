@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Yet Another Memory Game",
+  "short_name": "yamg",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

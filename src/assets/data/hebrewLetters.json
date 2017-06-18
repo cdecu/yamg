@@ -1,0 +1,29 @@
+{
+  "א" : { "title" : "Alef"          , "key" :  "א"     }
+, "ב" : { "title" : "Bet"           , "key" :  "ב"     }
+, "ג" : { "title" : "Gimel"         , "key" :  "ג"     }
+, "ד" : { "title" : "Dalet"         , "key" :  "ד"     }
+, "ה"	: { "title" : "He"            , "key" :  "ה"	    }
+, "ו" : { "title" : "Vav"           , "key" :  "ו"     }
+, "ז" : { "title" : "Zayin"         , "key" :  "ז"     }
+, "ח"	: { "title" : "Het"           , "key" :  "ח"	    }
+, "ט"	: { "title" : "Tet"           , "key" :  "ט"	    }
+, "י"  : { "title" : "Yod"          , "key" :  "י"     }
+, "ך" : { "title" : "FinalKaf"      , "key" :  "ך"    }
+, "כ" : { "title" : "Kaf"           , "key" :  "כ"     }
+, "ל" : { "title" : "Lamed"         , "key" :  "ל"     }
+, "ם" : { "title" : "FinalMem"      , "key" :  "ם"     }
+, "מ"	: { "title" : "Mem"           , "key" :  "מ"	    }
+, "ן" : { "title" : "FinalNun"      , "key" :  "ן"      }
+, "נ" : { "title" : "Nun"           , "key" :  "נ"     }
+, "ס"	: { "title" : "Samekh"        , "key" :  "ס"	    }
+, "ע"	: { "title" : "Ayin"          , "key" :  "ע"	    }
+, "ף"	: { "title" : "FinalPe"       , "key" :  "ף"	    }
+, "פ"	: { "title" : "Pe"            , "key" :  "פ"	    }
+, "ץ"	: { "title" : "FinalTsadi"    , "key" :  "ץ"    }
+, "צ"	: { "title" : "Tsadi"         , "key" :  "צ"	    }
+, "ק"	: { "title" : "Qof"           , "key" :  "ק"	  }
+, "ר" : { "title" : "Resh"          , "key" :  "ר"   }
+, "ש"	: { "title" : "Shin"          , "key" :  "ש"	  }
+, "ת"	: { "title" : "Tav"           , "key" :  "ת"	  }
+}

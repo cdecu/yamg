@@ -1,0 +1,41 @@
+board-tile {
+  .card {
+    position: relative;
+    width: 100%; height: 100%;
+    perspective: 1000px;
+  }
+  .front, .back {
+    position: absolute;
+    width: 100%; height: 100%;
+    border-radius: 5px;
+    backface-visibility:hidden;
+  }
+  .front {
+    display: table;
+    background-color: #66ccff;
+    transform: rotateY(180deg);
+    }
+  .front-letter{
+    display: table-cell;
+    text-align: center;
+    text-overflow: clip;
+    vertical-align: middle;
+    font-family: "Noto Sans", serif;
+    font-size: 2.5em;
+    }
+  .front-text{
+    display: table-cell;
+    text-align: center;
+    overflow: hidden;
+    vertical-align: middle;
+    font-family:"Noto Sans";
+    font-size: 1.25em;
+  }
+  .front-matched{
+    border: outset forestgreen;
+  }
+  .back {
+    background-size: contain;
+    background: #1802f8 url("../assets/imgs/angular.svg") no-repeat center;
+  }
+}

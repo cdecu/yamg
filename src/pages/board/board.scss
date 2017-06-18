@@ -1,0 +1,19 @@
+board {
+  .board {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: .5px;
+    .board-tile {
+      flex: 1 0 79.5px;
+      padding: .5px;
+      border: 2px solid #fff;
+      text-align: center;
+      }
+    .board-tile:nth-child(even){
+      //background-color:blue;
+      }
+  }
+}
