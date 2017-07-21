@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GameService} from "../../providers/game.service";
-import {IGame, IGameDataProvider, IGameItem} from "../../interfaces/games-intf";
+import {IGameDataProvider,IGameItem} from "../../interfaces/games-intf";
 import {Observable} from "rxjs/Observable";
 
 /**
@@ -13,7 +13,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class HelpGamePage implements OnInit {
 
-  items$ : Observable<Array<IGame>>;
+  items$ : Observable<Array<IGameItem>>;
   public get gameTitle(): string {
     if (!this.gameService.selectedItem) {
       // this.navCtrl.push('HelpPage');
