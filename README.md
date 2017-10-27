@@ -28,8 +28,8 @@ $
 $ rm -rf node_modules/ platforms/ www/ package-lock.json yamg.apk
 $ export PATH=$PATH:~/opt/Gradle/bin/
 $ ionic cordova platform add android
+$ ionic cordova build android --release
 $ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore yamg-android-key.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk yamg
-$ rm yamg.apk
 $ zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk  yamg.apk
 ```
 
