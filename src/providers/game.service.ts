@@ -6,6 +6,7 @@ import {GameNumbersProvider} from "./game-mumbers";
 import {GameGreekLettersProvider} from "./game-greekLetters";
 import {GameHebrewLettersProvider} from "./game-hebrewLetters";
 import {GameTile, IGame, IGameDataProvider} from "../interfaces/games-intf";
+import {GameEgyptianHierosProvider} from "./game-egyptianHieroglyphics";
 
 /* *********************************************************************************************************************
  flip flap game board tile
@@ -13,14 +14,20 @@ import {GameTile, IGame, IGameDataProvider} from "../interfaces/games-intf";
 @Injectable()
 export class GameService {
 
+  private static GameStartMsg   = 'Click to Start';
+  private static GameLostMsg    = 'Click to Start';
   public games: Array<IGame>;
 
   private NbTiles               = 9;
-  private timeoutID?: number    = undefined;
   private UnMatchedPairs        = 0;
-  private isOver                = false;
   private matches               = 0;
   private moves                 = 0;
+  private GameTimer?: number    = undefined;
+  public  GameStartTime?: any   = null;
+  public  GameCountDown: string = GameService.GameStartMsg;
+  public  isOver                = false;
+
+  private PickTimer?: number  = undefined;
   private firstPick?: GameTile  = undefined;
   private secondPick?: GameTile = undefined;
 
@@ -31,23 +38,25 @@ export class GameService {
    * Ionic make me singleton iff
    */
   constructor(private http: Http) {
-    console.log('Hello GameService Provider');
+    console.log('Hello GameService Provider !');
     this.games = [
-        {key: 'Numbers', title: 'Random Numbers', icon: 'flask'}
-      , {key: 'GreekLetters', title: 'Greek Letters', icon: 'bluetooth'}
-      , {key: 'GreekLeeterVsName', title: 'Greek Letters vs Latin Name', icon: 'bluetooth'}
-      , {key: 'HebrewLetters', title: 'Hebrew Letters', icon: 'wifi'}
-      , {key: 'HebrewLetterVsName', title: 'Hebrew Letters vs Latin Name', icon: 'wifi'}
-      , {key: 'Phone Numbers', title: 'Contacts Phone Numbers', icon: 'boat'}
-      , {key: 'Contacts', title: 'Contacts Phone Numbers vs Image', icon: 'boat'}
+        {key: 'Numbers'       , title: 'Random Numbers'                 , icon: 'infinite'   }
+      , {key: 'GreekLetters1' , title: 'Greek Letters'                  , icon: 'bluetooth'  }
+      , {key: 'GreekLeeters2' , title: 'Greek Letters vs Latin Name'    , icon: 'bluetooth'  }
+      , {key: 'HebrewLetters1', title: 'Hebrew Letters'                 , icon: 'wifi'       }
+      , {key: 'HebrewLetters2', title: 'Hebrew Letters vs Name'         , icon: 'wifi'       }
+      , {key: 'EgyptianHiero1', title: 'Egyptian Hieroglyph'            , icon: 'plane'      }
+      , {key: 'EgyptianHiero2', title: 'Egyptian Hieroglyph vc Name'    , icon: 'plane'      }
+      , {key: 'Phone Numbers' , title: 'Contacts Phone Numbers'         , icon: 'person'     }
+      , {key: 'Contacts'      , title: 'Contacts Phone Numbers vs Image', icon: 'boat'       }
     ];
     }
 
   public get tiles$(): Observable<Array<GameTile>> {
+    this.resetGame();
     console.log('Build Tiles:',this.NbTiles);
     let dataProvider : IGameDataProvider = this.getdataProvider();
-    let t$ = dataProvider.generateData(this.NbTiles);
-    return t$;
+    return dataProvider.generateData(this.NbTiles);
     }
 
   /* *********************************************************************************************************************
@@ -66,7 +75,6 @@ export class GameService {
       }
     console.log('NbRows',NbRows,'NbCols',NbCols,'Tiles',Nb);
     this.NbTiles = Nb;
-    this.resetGame();
     return true;
   }
 
@@ -81,8 +89,14 @@ export class GameService {
     this.firstPick = undefined;
     this.secondPick = undefined;
     this.UnMatchedPairs = this.NbTiles / 2;
-    clearTimeout(this.timeoutID);
-    this.timeoutID=undefined;
+
+    this.GameCountDown=GameService.GameStartMsg;
+    this.GameStartTime=null;
+    clearTimeout(this.GameTimer);
+    this.GameTimer=undefined;
+
+    clearTimeout(this.PickTimer);
+    this.PickTimer=undefined;
     }
 
 
@@ -90,28 +104,36 @@ export class GameService {
    * shuffle tiles ...
    */
   public getdataProvider(): IGameDataProvider{
-    let s = 'GreekLetters';
+    let s = 'EgyptianHiero1';
     if (this.selectedItem){
       s=this.selectedItem.key || 'GreekLetters';
       }
     //console.log('getdataProvider',s);
     switch(s) {
-      case 'GreekLetters':
-      case 'GreekLetterVsName':
+      case 'GreekLetters1':
+      case 'GreekLetters2':
         return new GameGreekLettersProvider(this.http,s);
-      case 'HebrewLetters':
-      case 'HebrewLetterVsName':
+      case 'HebrewLetters1':
+      case 'HebrewLetters2':
         return new GameHebrewLettersProvider(this.http,s);
+      case 'EgyptianHiero1':
+      case 'EgyptianHiero2':
+        return new GameEgyptianHierosProvider(this.http,s);
       case 'Numbers':
-        return new GameNumbersProvider(s);
+        return new GameNumbersProvider();
       }
-    return new GameGreekLettersProvider(this.http,s);
+    return new GameNumbersProvider();
     }
 
-  /* *********************************************************************************************************************
-   * Toggle clicked tile ...
-   */
+
+/* *********************************************************************************************************************
+ * Toggle clicked tile ...
+ */
   public clickTile(tile: GameTile): void {
+
+    if (!this.GameTimer) {
+      this.startGameTimer();
+    }
 
     if (this.secondPick) {
       console.log('TurnDown previous missmatch');
@@ -122,17 +144,17 @@ export class GameService {
       this.secondPick = undefined;
       if (dblClick)
         return;
-      }
+    }
 
     if (!tile || tile.turnedOn || (this.firstPick === tile) ) {
       console.log('Double click on firstPick ?');
       return;
-      }
+    }
 
     if (!this.firstPick) {
       console.log('first Pick ! Turn On and Wait for the second pick');
       this.firstPick = tile;
-      this.startTimeOut();
+      this.startPickTimeOut();
       tile.turnOn();
       return;
       }
@@ -140,7 +162,7 @@ export class GameService {
     if (this.firstPick.key != tile.key) {
       console.log('Second pick is missmatched !');
       this.secondPick = tile;
-      this.startTimeOut();
+      this.startPickTimeOut();
       tile.turnOn();
       this.moves++;
       return;
@@ -153,8 +175,8 @@ export class GameService {
     this.firstPick.match();
     this.firstPick = undefined;
     this.secondPick = undefined;
-    clearTimeout(this.timeoutID);
-    this.timeoutID=undefined;
+    clearTimeout(this.PickTimer);
+    this.PickTimer=undefined;
     tile.match();
     if (!this.UnMatchedPairs)
       this.gameWin();
@@ -162,11 +184,11 @@ export class GameService {
     }
 
   /* *********************************************************************************************************************
-   * TurnDown missmathed
+   * Second Pick TimeOut
    */
-  public startTimeOut(): void {
-    clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout(() => {
+  public startPickTimeOut(): void {
+    clearTimeout(this.PickTimer);
+    this.PickTimer = setTimeout(() => {
       if (this.firstPick) this.firstPick.turnDown();
       if (this.secondPick) this.secondPick.turnDown();
       this.firstPick  = undefined;
@@ -178,14 +200,41 @@ export class GameService {
    * Game Win
    */
   public gameWin(): void {
-    console.log('gameWin !')
+    console.log('gameWin !');
+    clearTimeout(this.GameTimer);
+    this.GameCountDown = "WIN !! in " + this.GameCountDown;
+    this.GameTimer=undefined;
+    this.isOver=true;
     }
 
   /* *********************************************************************************************************************
    * Game Win
    */
   public gameOver(): void {
-    console.log('gameOver !')
+    console.log('gameOver !');
+    clearTimeout(this.GameTimer);
+    this.GameCountDown = GameService.GameLostMsg;
+    this.GameTimer=undefined;
+    this.isOver=true;
     }
 
+  /* *********************************************************************************************************************
+   * Second Pick TimeOut
+   */
+  public startGameTimer(): void {
+    clearTimeout(this.GameTimer);
+    this.GameStartTime =  new Date();
+    this.GameTimer = setInterval(() => {
+      const duration = 5*60;
+      const diff = duration - (((Date.now() - this.GameStartTime) / 1000) | 0);
+      if (diff<0) {
+        this.gameOver();
+      } else {
+        const minutes = (diff / 60) | 0;
+        const seconds = (diff % 60) | 0;
+        this.GameCountDown = minutes + ":" + seconds;
+      }
+    }, 1000);
   }
+
+}

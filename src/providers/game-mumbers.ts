@@ -1,6 +1,6 @@
 import {Observer} from "rxjs/Observer";
 import {Observable} from "rxjs/Observable";
-import {IGameDataProvider, GameTile, shuffleTiles, IGameItem} from "../interfaces/games-intf";
+import {IGameDataProvider, GameTile, shuffleTiles} from "../interfaces/games-intf";
 
 
 /**
@@ -10,31 +10,22 @@ export class GameNumbersProvider implements IGameDataProvider{
 
   /**
    *
-   * @param selection
    */
-  constructor(private selection:string) {
+  constructor() {
     console.log('Hello GameNumbers Provider');
     }
 
-  /**
-   *
-   */
-  getData(): Observable<Array<IGameItem>>{
-    return null;
-    }
 
   /**
    *
-   * @param NbTiles
-   * @returns {Observable<Array<GameTile>>|"../../Observable".Observable<Array<GameTile>>|"../../../Observable".Observable<Array<GameTile>>}
    */
   generateData(NbTiles:number): Observable<Array<GameTile>>{
-    let t$ = new Observable<Array<GameTile>>((observer: Observer<Array<GameTile>>) => {
+    return new Observable<Array<GameTile>>((observer: Observer<Array<GameTile>>) => {
       console.log('Build Tiles$:',NbTiles);
       let tiles : GameTile[] = [];
       let c = (NbTiles / 2);
       for (let i = 0; i < c ; i++)
-        tiles[i] = new GameTile(i,'');
+        tiles[i] = new GameTile(i,'',null);
 
       let usedNumbers : Array<number> = [0];
       for (let i = 0,j = 0; i < c; i++) {
@@ -46,7 +37,7 @@ export class GameNumbersProvider implements IGameDataProvider{
         }
 
       for (let i = 0; i < c ; i++) {
-        tiles[c + i] = new GameTile(tiles[i].key, tiles[i].frontText);
+        tiles[c + i] = new GameTile(tiles[i].key, tiles[i].frontText,null);
         tiles[c + i].isLetter = true;
         }
 
@@ -54,7 +45,6 @@ export class GameNumbersProvider implements IGameDataProvider{
       observer.next(tiles);
       observer.complete();
       });
-    return t$;
     }
 
 }

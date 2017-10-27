@@ -17,6 +17,7 @@ self.toolbox.precache(
     './build/main.js',
     './build/main.css',
     './build/polyfills.js',
+    './assets/css/font-awesome.min.css',
     'index.html',
     'manifest.json'
   ]

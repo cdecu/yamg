@@ -27,5 +27,6 @@ $ ionic cordova run android
 
 ## Build 4 my kids
 
-
++ https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/signunicode.xml
++ https://mjn.host.cs.st-andrews.ac.uk/egyptian/fonts/newgardiner.html
 

@@ -7,13 +7,6 @@ export interface IGame {
   title: string,
   icon: string
 }
-/* *********************************************************************************************************************
- */
-export interface IGameItem {
-  key: string,
-  title: string,
-  icon: string
-}
 
 /* *********************************************************************************************************************
  flip flap game board tile
@@ -32,7 +25,7 @@ export class GameTile {
   public backState  = 'front';
   public matched    = false;
 
-  constructor(public key : number, public frontText : string) {
+  constructor(public key : number, public frontText : string, public frontStyle : object) {
     this.frontText1=this.frontText;
     this.frontText2=this.frontText;
     this._isLetter=(this.frontText.length<=1);
@@ -47,12 +40,6 @@ export class GameTile {
   public turnDown(): void {
     this.frontState='back';
     this.backState='front';
-    this.turnedOn=false;
-    this.matched=false;
-  }
-  public delayedTurnDown(): void {
-    this.frontState='delayedback';
-    this.backState='delayedfront';
     this.turnedOn=false;
     this.matched=false;
   }
@@ -73,7 +60,7 @@ export class GameTile {
  * IGameDataProvider
  */
 export interface IGameDataProvider {
-  getData(): Observable<Array<IGameItem>>;
+  // getData(): Observable<Array<IGameItem>>;
   generateData(NbTiles:number): Observable<Array<GameTile>>;
 }
 
@@ -81,7 +68,7 @@ export interface IGameDataProvider {
  * shuffle tiles ...
  */
 export function shuffleTiles(tiles:GameTile[]): void {
-  console.log('GameService shuffleTiles');
+  // console.log('GameService shuffleTiles');
   for (let i = tiles.length - 1; i > 0; i--) {
     let j    = Math.floor(Math.random() * (i + 1));
     let temp = tiles[i];

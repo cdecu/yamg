@@ -1,5 +1,6 @@
 {
   "name": "yamg",
   "app_id": "332a5f0d",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {}
 }

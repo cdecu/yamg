@@ -4,12 +4,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { PlayPage } from './play';
 import { GameBoardComponent } from "./board";
 import { BoardTileComponent } from "./board-tile";
+import {ChronoComponent} from "./chrono";
 
 @NgModule({
   declarations: [
     PlayPage,
+      ChronoComponent,
       GameBoardComponent,
-      BoardTileComponent,
+        BoardTileComponent,
   ],
   imports: [IonicPageModule.forChild(PlayPage)],
 })

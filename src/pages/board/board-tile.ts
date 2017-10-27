@@ -31,9 +31,13 @@ export class BoardTileComponent {
   constructor(private gameService: GameService ) {
     }
 
+  frontStyle(): object {
+    return this.tile.frontStyle || { "font-family":"Noto Sans", "font-size": "1.25em"}
+  }
+
   Toggle(): void {
     // console.log('Toggle ',this._tile);
     this.gameService.clickTile(this.tile);
-    }
+  }
 
 }
