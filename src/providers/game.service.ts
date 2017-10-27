@@ -242,7 +242,7 @@ export class GameService {
     clearTimeout(this.GameTimer);
     this.GameStartTime =  new Date();
     this.GameTimer = setInterval(() => {
-      const duration = 10;
+      const duration = 5*60;
       const diff = duration - (((Date.now() - this.GameStartTime) / 1000) | 0);
       if (diff<0) {
         this.gameOver();
