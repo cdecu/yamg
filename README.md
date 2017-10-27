@@ -12,8 +12,8 @@ $ ionic serve
 Then build wanted platform
 
 ```bash
-$ ionic cordova platform add android
-$ ionic cordova run android
+$ ionic cordova build android --release
+$ 
 ```
 
 ## Build to learn ionic, angular, rxjs, ...
@@ -24,8 +24,19 @@ $ ionic cordova run android
 + https://github.com/shlomiassaf/ng2-chess
 + http://www.angularjs4u.com/angularjs2/angular-2-games/
 
+```bash
+$ rm -rf node_modules/ platforms/ www/ package-lock.json yamg.apk
+$ export PATH=$PATH:~/opt/Gradle/bin/
+$ ionic cordova platform add android
+$ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore yamg-android-key.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk yamg
+$ zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk  yamg.apk
+```
+
 
 ## Build 4 my kids
+>
+
+## Ref
 
 + https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/signunicode.xml
 + https://mjn.host.cs.st-andrews.ac.uk/egyptian/fonts/newgardiner.html
