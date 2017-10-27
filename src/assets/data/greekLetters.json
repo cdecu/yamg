@@ -1,26 +1,26 @@
-{
- "Α" : { "title" : "Alpha"  , "key" : "Α" }             ,"α"  : { "title" : "alpha"   , "key" : "α"  }
-,"Β" : { "title" : "Beta"   , "key" : "Β" }             ,"β"  : { "title" : "beta"    , "key" : "β"  }
-,"Γ" : { "title" : "Gamma"  , "key" : "Γ" }             ,"γ"  : { "title" : "gamma"   , "key" : "γ"  }
-,"Δ" : { "title" : "Delta"  , "key" : "Δ" }             ,"δ"  : { "title" : "delta"   , "key" : "δ"  }
-,"Ε" : { "title" : "Epsilon", "key" : "Ε" }             ,"ε"  : { "title" : "epsilon" , "key" : "ε"  }
-,"Ζ" : { "title" : "Zeta"   , "key" : "Ζ" }             ,"ζ"  : { "title" : "zeta"    , "key" : "ζ"  }
-,"Η" : { "title" : "Eta"    , "key" : "Η" }             ,"η"  : { "title" : "eta"     , "key" : "η"  }
-,"Θ" : { "title" : "Theta"  , "key" : "Θ" }             ,"θ"  : { "title" : "theta"   , "key" : "θ"  }
-,"Ι" : { "title" : "Iota"   , "key" : "Ι" }             ,"ι"  : { "title" : "iota"    , "key" : "ι"  }
-,"Κ" : { "title" : "Kappa"  , "key" : "Κ" }             ,"κ"  : { "title" : "kappa"   , "key" : "κ"  }
-,"Λ" : { "title" : "Lambda" , "key" : "Λ" }             ,"λ"  : { "title" : "lambda"  , "key" : "λ"  }
-,"Μ" : { "title" : "Mu"     , "key" : "Μ" }             ,"μ"  : { "title" : "mu"      , "key" : "μ"  }
-,"Ν" : { "title" : "Nu"     , "key" : "Ν" }             ,"ν"  : { "title" : "nu"      , "key" : "ν"  }
-,"Ξ" : { "title" : "Xi"     , "key" : "Ξ" }             ,"ξ"  : { "title" : "xi"      , "key" : "ξ"  }
-,"Ο" : { "title" : "Omicron", "key" : "Ο" }             ,"ο"  : { "title" : "omicron" , "key" : "ο"  }
-,"Π" : { "title" : "Pi"     , "key" : "Π" }             ,"π"  : { "title" : "pi"      , "key" : "π"  }
-,"Ρ" : { "title" : "Rho"    , "key" : "Ρ" }             ,"ρ"  : { "title" : "rho"     , "key" : "ρ"  }
-,"Σ" : { "title" : "Sigma"  , "key" : "Σ" }             ,"σ"  : { "title" : "sigma"   , "key" : "σ"  }          ,"ς"  : { "title" : "sigma final" , "key" : "ς"   }
-,"Τ" : { "title" : "Tau"    , "key" : "Τ" }             ,"τ"  : { "title" : "tau"     , "key" : "τ"  }
-,"Υ" : { "title" : "Upsilon", "key" : "Υ" }             ,"υ"  : { "title" : "upsilon" , "key" : "υ"  }
-,"Φ" : { "title" : "Phi"    , "key" : "Φ" }             ,"φ"  : { "title" : "phi"     , "key" : "φ"  }
-,"Χ" : { "title" : "Chi"    , "key" : "Χ" }             ,"χ"  : { "title" : "chi"     , "key" : "χ"  }
-,"Ψ" : { "title" : "Psi"    , "key" : "Ψ" }             ,"ψ"  : { "title" : "psi"     , "key" : "ψ"  }
-,"Ω" : { "title" : "Omega"  , "key" : "Ω" }             ,"ω"  : { "title" : "omega"   , "key" : "ω"  }
-}
+[
+ { "name": "Alpha"  , "key" : "Α" },  { "name": "alpha"   , "key" : "α"  },
+ { "name": "Beta"   , "key" : "Β" },  { "name": "beta"    , "key" : "β"  },
+ { "name": "Gamma"  , "key" : "Γ" },  { "name": "gamma"   , "key" : "γ"  },
+ { "name": "Delta"  , "key" : "Δ" },  { "name": "delta"   , "key" : "δ"  },
+ { "name": "Epsilon", "key" : "Ε" },  { "name": "epsilon" , "key" : "ε"  },
+ { "name": "Zeta"   , "key" : "Ζ" },  { "name": "zeta"    , "key" : "ζ"  },
+ { "name": "Eta"    , "key" : "Η" },  { "name": "eta"     , "key" : "η"  },
+ { "name": "Theta"  , "key" : "Θ" },  { "name": "theta"   , "key" : "θ"  },
+ { "name": "Iota"   , "key" : "Ι" },  { "name": "iota"    , "key" : "ι"  },
+ { "name": "Kappa"  , "key" : "Κ" },  { "name": "kappa"   , "key" : "κ"  },
+ { "name": "Lambda" , "key" : "Λ" },  { "name": "lambda"  , "key" : "λ"  },
+ { "name": "Mu"     , "key" : "Μ" },  { "name": "mu"      , "key" : "μ"  },
+ { "name": "Nu"     , "key" : "Ν" },  { "name": "nu"      , "key" : "ν"  },
+ { "name": "Xi"     , "key" : "Ξ" },  { "name": "xi"      , "key" : "ξ"  },
+ { "name": "Omicron", "key" : "Ο" },  { "name": "omicron" , "key" : "ο"  },
+ { "name": "Pi"     , "key" : "Π" },  { "name": "pi"      , "key" : "π"  },
+ { "name": "Rho"    , "key" : "Ρ" },  { "name": "rho"     , "key" : "ρ"  },
+ { "name": "Sigma"  , "key" : "Σ" },  { "name": "sigma"   , "key" : "σ"  },  { "name": "sigma final" , "key" : "ς"   },
+ { "name": "Tau"    , "key" : "Τ" },  { "name": "tau"     , "key" : "τ"  },
+ { "name": "Upsilon", "key" : "Υ" },  { "name": "upsilon" , "key" : "υ"  },
+ { "name": "Phi"    , "key" : "Φ" },  { "name": "phi"     , "key" : "φ"  },
+ { "name": "Chi"    , "key" : "Χ" },  { "name": "chi"     , "key" : "χ"  },
+ { "name": "Psi"    , "key" : "Ψ" },  { "name": "psi"     , "key" : "ψ"  },
+ { "name": "Omega"  , "key" : "Ω" },  { "name": "omega"   , "key" : "ω"  }
+]

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import {GameService} from "../../providers/game.service";
 import {IGame} from "../../interfaces/games-intf";
 
-/**
+/* *********************************************************************************************************************
  * Generated class for the HelpPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
@@ -16,16 +16,17 @@ import {IGame} from "../../interfaces/games-intf";
 })
 export class HelpPage {
 
-  public get items(): Array<IGame> { return this.gameService.games};
+  public get items(): Array<IGame> {
+    return this.gameService.games.filter( game => game.showHelp )
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private gameService: GameService) {
+  /* ..................................................................................................................
+   *
+   */
+  constructor(public navCtrl: NavController, private gameService: GameService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HelpPage');
-  }
-
-  /* *********************************************************************************************************************
+  /* ..................................................................................................................
    * Goto wanted game
    */
   itemTapped(event, item) {

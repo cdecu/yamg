@@ -3,9 +3,10 @@ import {Observable} from "rxjs/Observable";
 /* *********************************************************************************************************************
  */
 export interface IGame {
-  key: string,
+  key  : string,
   title: string,
-  icon: string
+  icon : string
+  showHelp: boolean
 }
 
 /* *********************************************************************************************************************
@@ -14,9 +15,12 @@ export interface IGame {
 export class GameTile {
 
   private _isLetter = true;
+
   public get isLetter(): boolean {return this._isLetter;};
   public set isLetter(value: boolean) {this._isLetter=value;};
   public get isText(): boolean {return !this._isLetter;};
+  public get Code(): string {return this.frontText1;};
+  public get Descr(): string {return this.frontText1===this.frontText2 ? '' : this.frontText2;};
 
   public frontText1 = '';
   public frontText2 = '';
@@ -25,7 +29,7 @@ export class GameTile {
   public backState  = 'front';
   public matched    = false;
 
-  constructor(public key : number, public frontText : string, public frontStyle : object) {
+  constructor(public key : number, public frontText : string, public frontStyle : object, public frontTextStyle : object) {
     this.frontText1=this.frontText;
     this.frontText2=this.frontText;
     this._isLetter=(this.frontText.length<=1);
@@ -62,12 +66,14 @@ export class GameTile {
 export interface IGameDataProvider {
   // getData(): Observable<Array<IGameItem>>;
   generateData(NbTiles:number): Observable<Array<GameTile>>;
+  // getData(): Observable<Array<IGameItem>>;
+  generateAllData(): Observable<Array<GameTile>>;
 }
 
 /* *********************************************************************************************************************
  * shuffle tiles ...
  */
-export function shuffleTiles(tiles:GameTile[]): void {
+export function shuffleTiles(tiles:object[]): void {
   // console.log('GameService shuffleTiles');
   for (let i = tiles.length - 1; i > 0; i--) {
     let j    = Math.floor(Math.random() * (i + 1));

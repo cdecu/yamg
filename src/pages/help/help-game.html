@@ -9,17 +9,9 @@
 
 <ion-content padding>
   <ion-list>
-    <!--<button ion-item *ngFor="let item of items$" (click)="itemTapped($event, item)">-->
-    <ion-card *ngFor="let item of items$ | async">
-      <!--<div>-->
-      <span>{{item.key}}</span>
-      <span>{{item.title}}</span>
-      <!--<ion-buttons>-->
-        <!--<button class="fa fa-volume-up"></button>-->
-      <!--</ion-buttons>-->
-      <!--</div>-->
+    <ion-card class="card" *ngFor="let tile of allTiles$ | async">
+      <span class="code">{{tile.Code}}</span>
+      <span class="descr">{{tile.Descr}}</span>
     </ion-card>
-      <!--<ion-icon name="{{item.icon}}" item-left></ion-icon>-->
-    <!--</button>-->
   </ion-list>
 </ion-content>

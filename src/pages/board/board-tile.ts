@@ -20,22 +20,37 @@ import {GameService} from "../../providers/game.service";
 })
 export class BoardTileComponent {
 
+  private static TextFontStyle = { "font-family":"Noto Sans", "font-size": "1.25em"};
+
   @Input() tile : GameTile;
-  public get frontState(): string { return this.tile.frontState};
-  public get backState(): string { return this.tile.backState};
+  public get frontState(): string { return this.gameService.isOver && !this.tile.matched ? this.tile.backState : this.tile.frontState};
+  public get backState(): string { return this.gameService.isOver && !this.tile.matched ? this.tile.frontState : this.tile.backState};
   public get frontText(): string { return this.tile.frontText};
   public get matched(): boolean { return this.tile.matched};
   public get isLetter(): boolean { return this.tile.isLetter};
   public get isText(): boolean { return this.tile.isText};
 
+  /* ..................................................................................................................
+   *
+   */
   constructor(private gameService: GameService ) {
     }
 
-  frontStyle(): object {
-    return this.tile.frontStyle || { "font-family":"Noto Sans", "font-size": "1.25em"}
+  /* ..................................................................................................................
+   *
+   */
+  public frontStyle(): object {
+    if (this.tile.isText) {
+      return this.tile.frontTextStyle || BoardTileComponent.TextFontStyle;
+    } else {
+      return this.tile.frontStyle || BoardTileComponent.TextFontStyle;
+    }
   }
 
-  Toggle(): void {
+  /* ..................................................................................................................
+   *
+   */
+  public Toggle(): void {
     // console.log('Toggle ',this._tile);
     this.gameService.clickTile(this.tile);
   }

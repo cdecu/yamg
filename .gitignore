@@ -33,6 +33,11 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-.sourcemaps
 *.js
 *.map
+.sourcemaps
+.package-lock.json
+yamg-android-key.keystore
+yamg.apk
+!*service-worker.js
+!config/copy.config.js
