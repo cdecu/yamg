@@ -11,6 +11,8 @@ import {GameService} from "./game.service";
  */
 export class GameGreekLettersProvider implements IGameDataProvider{
 
+  private static TextFontStyle = { "font-family":"Noto Sans", "font-size": "2.2em"};
+
   /* ..................................................................................................................
    *
    */
@@ -30,7 +32,7 @@ export class GameGreekLettersProvider implements IGameDataProvider{
           let c = (NbTiles / 2);
 
           for (let i = 0; i < c ; i++)
-            tiles[i] = new GameTile(i,'',null,null);
+            tiles[i] = new GameTile(i,'',GameGreekLettersProvider.TextFontStyle,null);
 
           let letters : Array<any> = res.json();
           while (letters.length<c)
@@ -47,7 +49,7 @@ export class GameGreekLettersProvider implements IGameDataProvider{
             }
 
           for (let i = 0; i < c ; i++) {
-            tiles[c + i] = new GameTile(tiles[i].key, tiles[i].frontText,null,null);
+            tiles[c + i] = new GameTile(tiles[i].key, tiles[i].frontText,GameGreekLettersProvider.TextFontStyle,null);
             tiles[c + i].frontText1 = tiles[i].frontText1;
             tiles[c + i].frontText2 = tiles[i].frontText2;
             if (selectedGame===GameService.GameMode_GreekLetters2) {

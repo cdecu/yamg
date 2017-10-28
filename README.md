@@ -41,4 +41,8 @@ $ zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk
 
 + https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/signunicode.xml
 + https://mjn.host.cs.st-andrews.ac.uk/egyptian/fonts/newgardiner.html
++ https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/signdescriptioneng.xml
++ https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/signunicode.xml
++ https://mjn.host.cs.st-andrews.ac.uk/egyptian/unicode/tablemain.html
+
 
