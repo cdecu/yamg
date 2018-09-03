@@ -1,34 +1,36 @@
 import {Component, ViewChild} from '@angular/core';
-import {MenuController, Nav, Platform} from 'ionic-angular';
-import {StatusBar } from '@ionic-native/status-bar';
-import {SplashScreen } from '@ionic-native/splash-screen';
 
-import {GameService} from "../providers/game.service";
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {GameService} from '../providers/game.service';
+import {MenuController, Platform} from '@ionic/angular';
 
 @Component({
-  templateUrl: 'app.html'
+  selector: 'app-root',
+  templateUrl: 'app.component.html'
 })
-export class MyApp {
+export class AppComponent {
 
-  @ViewChild(Nav) nav: Nav;
-  // rootPage:any = HomePage;
-  pages: Array<{ title: string, component: any }>;
+  public appPages: Array<{ title : string, url : string, icon? : string }>;
 
-  constructor(public platform: Platform,public statusBar: StatusBar,public splashScreen: SplashScreen,public menu: MenuController,public gameBoard: GameService) {
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    public menu: MenuController,
+    public gameBoard: GameService,
+    private statusBar: StatusBar
+  ) {
 
     // set our app's pages to be displaied in the Menu
-    this.pages = [
-      {title: 'Games',  component: 'HomePage'  },
-      {title: 'Scores', component: 'ScoresPage'},
-      {title: 'Help',   component: 'HelpPage'  }
-      ];
+    this.appPages = [
+      {title: 'Games',  url: '/'          , icon: 'games'},
+      {title: 'Scores', url: '/ScoresPage'},
+      {title: 'Help',   url: '/HelpPage'  }
+    ];
 
     this.initializeApp();
   }
 
-  /** ******************************************************************************************************************
-   *
-   */
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -36,18 +38,20 @@ export class MyApp {
       this.statusBar.hide();
       this.splashScreen.hide();
       this.gameBoard.recalcBoard(this.platform);
-      this.nav.setRoot('HomePage');
-      });
+    });
 
     this.platform.resize.subscribe(() => {
 
       // Cordova app comes out from the background.
-      if (this.gameBoard.recalcBoard(this.platform))
+      console.log('platform.resize');
+      if (this.gameBoard.recalcBoard(this.platform)) {
         this.restartGame();
-      else
+      } else {
         this.menu.close();
+      }
 
     });
+
   }
 
   /** ******************************************************************************************************************
@@ -58,7 +62,7 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    // this.nav.setRoot(page.component);
   }
 
   /** ******************************************************************************************************************
@@ -66,8 +70,8 @@ export class MyApp {
    */
   restartGame() {
     console.log('restartGame');
-    this.nav.popToRoot({});
+    // this.nav.popToRoot({});
   }
 
-}
 
+}

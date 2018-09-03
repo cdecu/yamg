@@ -1,2 +1,26 @@
-play{
+board {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: .5px;
+}
+chrono {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+.game-over {
+  background: rgba(0, 0, 0, 0.5);
+  color: #a4a4a4;
+  pointer-events: auto;
 }

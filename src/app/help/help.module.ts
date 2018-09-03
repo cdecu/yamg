@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
+import { IonicModule } from '@ionic/angular';
+
 import { HelpPage } from './help.page';
 
+const routes : Routes = [
+  {
+    path: '',
+    component: HelpPage
+  }
+];
+
 @NgModule({
-  declarations: [
-    HelpPage,
-  ],
   imports: [
-    IonicPageModule.forChild(HelpPage),
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
   ],
-  exports: [
-    HelpPage
-  ]
+  declarations : [HelpPage]
 })
 export class HelpPageModule {}

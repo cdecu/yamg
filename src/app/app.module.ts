@@ -1,34 +1,34 @@
-import {ErrorHandler, NgModule } from '@angular/core';
-import {HttpModule} from "@angular/http";
-import {BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
 
-import {IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import {SplashScreen } from '@ionic-native/splash-screen';
-import {StatusBar } from '@ionic-native/status-bar';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import {MyApp } from './app.component';
-import {GameService} from "../providers/game.service";
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import {GameService} from '../providers/game.service';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
-  declarations: [
-    MyApp
-  ],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
-    IonicModule.forRoot(MyApp),
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp
+    HttpClientModule,
+    IonicModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     GameService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

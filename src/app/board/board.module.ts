@@ -1,18 +1,29 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
-import { PlayPage } from './board.page';
-import { GameBoardComponent } from "./board.page";
-import { BoardTileComponent } from "./board-tile";
-import {ChronoComponent} from "./board-chrono";
+import { IonicModule } from '@ionic/angular';
+
+import {BoardPage} from './board.page';
+import {GameBoardComponent} from './board-playground';
+import {BoardTileComponent} from './board-tile';
+import {BoardChronoComponent} from './board-chrono';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: BoardPage
+  }
+];
 
 @NgModule({
-  declarations: [
-    PlayPage,
-      ChronoComponent,
-      GameBoardComponent,
-        BoardTileComponent,
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
   ],
-  imports: [IonicPageModule.forChild(PlayPage)],
+  declarations: [BoardPage, GameBoardComponent, BoardTileComponent, BoardChronoComponent]
 })
-export class PlayPageModule { }
+export class BoardPageModule {}

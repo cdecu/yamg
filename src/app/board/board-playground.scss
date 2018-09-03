@@ -1,0 +1,9 @@
+board-tile {
+  flex: 1 0 79.5px;
+  padding: .5px;
+  text-align: center;
+  //border: 2px solid red;
+}
+board-tile:nth-child(even){
+  //border: 2px solid blue;
+}

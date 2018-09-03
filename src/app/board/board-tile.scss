@@ -1,37 +1,37 @@
-board-tile {
-  .card {
-    position: relative;
-    width: 100%; height: 100%;
-    perspective: 1000px;
-  }
+.tile {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
   .front, .back {
     position: absolute;
-    width: 100%; height: 100%;
     border-radius: 5px;
-    backface-visibility:hidden;
+    backface-visibility: hidden;
   }
   .front {
     display: table;
     background-color: #66ccff;
     transform: rotateY(180deg);
-    }
-  .front-letter{
+  }
+  .front-letter {
     display: table-cell;
     text-align: center;
     text-overflow: clip;
     vertical-align: middle;
-    }
-  .front-text{
+  }
+  .front-text {
     display: table-cell;
     text-align: center;
     overflow: hidden;
     vertical-align: middle;
   }
-  .front-matched{
+  .front-matched {
     border: outset forestgreen;
   }
   .back {
     background-size: contain;
-    background: #1802f8 url("../assets/imgs/angular.svg") no-repeat center;
+    background: #1802f8 url("../../assets/imgs/angular.svg") no-repeat center;
   }
 }

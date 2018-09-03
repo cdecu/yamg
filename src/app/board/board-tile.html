@@ -1,9 +1,9 @@
-<div class="card">
-  <div class="front" (click)="Toggle()" [@flipflap]="frontState">
+<div class="tile">
+  <div class="tile front" (click)="Toggle()" [@flipflap]="frontState">
     <div [ngClass]="{'front-matched':matched,'front-letter':isLetter,'front-text':isText}" [ngStyle]="frontStyle()">
     {{frontText}}
     </div>
   </div>
-  <div class="back" (click)="Toggle()" [@flipflap]="backState">
+  <div class="tile back" (click)="Toggle()" [@flipflap]="backState">
   </div>
 </div>

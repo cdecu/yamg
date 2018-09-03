@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { IGame } from '../../interfaces/games-intf';
-import { Router } from '@angular/router';
-import { GameService } from '../../providers/game.service';
+import {Router} from '@angular/router';
+import {IGame} from '../../interfaces/games-intf';
+import {GameService} from '../../providers/game.service';
 
 @Component({
-  selector: 'app-help',
-  templateUrl: './help.page.html',
-  styleUrls: ['./help.page.scss'],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class HelpPage {
+export class HomePage {
 
   public get items(): Array<IGame> { return this.gameService.games; }
 
@@ -19,7 +19,7 @@ export class HelpPage {
    * Goto wanted game
    */
   itemTapped(event, item) {
-    this.router.navigate(['/HelpPage' , item]);
+    this.router.navigate(['/BoardPage' , item]);
   }
 
 }

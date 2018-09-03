@@ -1,8 +1,5 @@
 {
-  "name": "yamg",
-  "app_id": "ec65169b",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+  "name": "Testv4",
+  "integrations": {},
+  "type": "angular"
 }

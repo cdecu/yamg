@@ -7,11 +7,11 @@ import {GameService} from "../../providers/game.service";
  */
 @Component({
   selector: 'chrono',
-  templateUrl: 'board-chrono.html'
+  templateUrl: 'board-chrono.html',
+  styleUrls: ['board-chrono.scss']
 })
-export class ChronoComponent {
+export class BoardChronoComponent {
 
-  public get isOver(): boolean { return this.gameService.isOver };
   public get GameCountDown(): string { return this.gameService.GameCountDown };
 
   constructor(public gameService: GameService) {

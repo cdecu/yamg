@@ -1,18 +1,16 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavParams} from "ionic-angular";
+import {GameService} from '../../providers/game.service';
 
-import {GameService} from "../../providers/game.service";
-
-@IonicPage()
 @Component({
-  selector: 'play',
-  templateUrl: 'board.page.html',
+  selector: 'app-board',
+  templateUrl: './board.page.html',
+  styleUrls: ['./board.page.scss']
 })
-export class PlayPage  {
+export class BoardPage {
 
-  constructor(public gameService: GameService, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.gameService.selectedItem = navParams.get('item');
-    }
+  public get isOver(): boolean { return this.gameService.isOver; }
+
+  constructor(public gameService: GameService) {
+  }
 
 }
