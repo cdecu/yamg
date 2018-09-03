@@ -6,7 +6,7 @@ import {GameService} from "../../providers/game.service";
 @IonicPage()
 @Component({
   selector: 'play',
-  templateUrl: 'play.html',
+  templateUrl: 'board.page.html',
 })
 export class PlayPage  {
 

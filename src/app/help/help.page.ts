@@ -12,7 +12,7 @@ import {IGame} from "../../interfaces/games-intf";
 @IonicPage()
 @Component({
   selector: 'page-help',
-  templateUrl: 'help.html',
+  templateUrl: 'help.page.html',
 })
 export class HelpPage {
 

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { PlayPage } from './play';
-import { GameBoardComponent } from "./board";
+import { PlayPage } from './board.page';
+import { GameBoardComponent } from "./board.page";
 import { BoardTileComponent } from "./board-tile";
-import {ChronoComponent} from "./chrono";
+import {ChronoComponent} from "./board-chrono";
 
 @NgModule({
   declarations: [

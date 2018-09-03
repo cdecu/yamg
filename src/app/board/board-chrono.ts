@@ -7,7 +7,7 @@ import {GameService} from "../../providers/game.service";
  */
 @Component({
   selector: 'chrono',
-  templateUrl: 'chrono.html'
+  templateUrl: 'board-chrono.html'
 })
 export class ChronoComponent {
 
