@@ -1,37 +1,59 @@
-board-tile {
-  .card {
-    position: relative;
-    width: 100%; height: 100%;
-    perspective: 1000px;
-  }
-  .front, .back {
+:host {
+  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+  .flip-card {
     position: absolute;
-    width: 100%; height: 100%;
-    border-radius: 5px;
-    backface-visibility:hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    background-color: transparent;
+    display: grid;
   }
-  .front {
-    display: table;
-    background-color: #66ccff;
-    transform: rotateY(180deg);
+
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+
+    /* Position the front and back side */
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: calc(100% - 6px);
+      height: calc(100% - 6px);
+      backface-visibility: hidden;
+      border: ridge silver;
+      display: flex;
+      .tile-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: auto;
+        align-self: center;
+        user-select: none;
+      }
     }
-  .front-letter{
-    display: table-cell;
-    text-align: center;
-    text-overflow: clip;
-    vertical-align: middle;
+
+    /* Style the front side */
+    .flip-card-front {
+      background: #1802f8 url('/yamg.svg') no-repeat center;
+      align-self: center;
+      justify-self: center;
+      color: black;
     }
-  .front-text{
-    display: table-cell;
-    text-align: center;
-    overflow: hidden;
-    vertical-align: middle;
-  }
-  .front-matched{
-    border: outset forestgreen;
-  }
-  .back {
-    background-size: contain;
-    background: #1802f8 url("../assets/imgs/angular.svg") no-repeat center;
+
+    /* Style the back side */
+    .flip-card-back {
+      background-color: dodgerblue;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    .matched {
+      border: outset forestgreen;
+    }
   }
 }

@@ -1,0 +1,97 @@
+{
+  "name": "yamg",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "yamg",
+  "sourceRoot": "apps/yamg/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/yamg",
+        "index": "apps/yamg/src/index.html",
+        "browser": "apps/yamg/src/main.ts",
+        "polyfills": [],
+        "tsConfig": "apps/yamg/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/yamg/public"
+          }
+        ],
+        "styles": [
+          "@angular/material/prebuilt-themes/azure-blue.css",
+          "node_modules/prismjs/themes/prism-okaidia.css",
+          "apps/yamg/src/styles.scss"
+        ],
+        "scripts": [
+          "node_modules/prismjs/prism.js",
+          "node_modules/prismjs/components/prism-sql.min.js"
+        ],
+        "server": "apps/yamg/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/yamg/src/server.ts"
+        },
+        "prerender": {
+          "discoverRoutes": true,
+          "routesFile": ""
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "yamg:build:production"
+        },
+        "development": {
+          "buildTarget": "yamg:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "yamg:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "yamg:build",
+        "staticFilePath": "dist/apps/yamg/browser",
+        "spa": true
+      }
+    }
+  }
+}

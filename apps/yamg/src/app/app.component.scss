@@ -1,0 +1,48 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  user-select: none;
+  height: 100%;
+
+  .yamg-title {
+    border-bottom: var(--mat-sys-outline-variant) 1px solid;
+    gap: 0.5rem;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    .yamg-title-hamburger {
+      //border: #c3002f 1px solid;
+    }
+    .yamg-title-header {
+      //border: #c3002f 1px solid;
+    }
+    .yamg-score {
+      border: #c3002f 1px solid;
+    }
+    .yamg-countdown {
+      border: #c3002f 1px solid;
+    }
+  }
+
+  mat-sidenav-container {
+    .yamg-sidenav {
+      border-right: var(--mat-sys-outline-variant) 1px solid;
+      min-width: 25vw;
+      width: fit-content;
+      .yamg-sidenav-menu {
+        display: flex;
+        flex-direction: column;
+        height: 100pc;
+        gap: 0.5rem;
+        a {
+          justify-content: left;
+        }
+      }
+    }
+
+    .yamg-content {
+      padding: 0.5rem;
+    }
+  }
+}

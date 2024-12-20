@@ -1,25 +1,15 @@
-import {Component } from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {GameService} from "../../providers/game.service";
-import {IGame} from "../../interfaces/games-intf";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatAnchor } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { YamgConfigService } from '../../app/yamg-config';
+import { RouterLink } from '@angular/router';
 
-@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  imports: [MatAnchor, MatIcon, RouterLink],
+  templateUrl: './home.html',
+  styleUrl: './home.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage {
-
-  public get items(): Array<IGame> { return this.gameService.games};
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private gameService: GameService) {
-  }
-
-  /* *********************************************************************************************************************
-   * Goto wanted game
-   */
-  itemTapped(event, item) {
-    this.navCtrl.push('PlayPage', {item: item});
-  }
+export class HomePageComponent {
+  public readonly yamgConfig = inject(YamgConfigService);
 }
-

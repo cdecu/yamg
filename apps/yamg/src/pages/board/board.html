@@ -1,3 +1,7 @@
-  <div class="board">
-    <board-tile class="board-tile" *ngFor="let tile of tiles$ | async" [tile]=tile></board-tile>
-  </div>
+<mat-grid-list class="board" [cols]="yamgGame.yamgSize.cols" rowHeight="fit">
+  @for (tile of yamgGame.store.entities(); track tile.id) {
+  <mat-grid-tile class="board-tile">
+    <yamg-board-tile [tile]="tile"></yamg-board-tile>
+  </mat-grid-tile>
+  }
+</mat-grid-list>

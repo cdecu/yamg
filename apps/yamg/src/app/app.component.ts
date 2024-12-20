@@ -1,73 +1,54 @@
-import {Component, ViewChild} from '@angular/core';
-import {MenuController, Nav, Platform} from 'ionic-angular';
-import {StatusBar } from '@ionic-native/status-bar';
-import {SplashScreen } from '@ionic-native/splash-screen';
-
-import {GameService} from "../providers/game.service";
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
+import { YamgConfigService, YamgMainMenuPage } from './yamg-config';
+import { MatDividerModule } from '@angular/material/divider';
+import { YamgGameService } from './yamg-game.service';
 
 @Component({
-  templateUrl: 'app.html'
+  imports: [
+    RouterModule,
+    MatToolbar,
+    MatIcon,
+    MatSidenavContainer,
+    MatSidenavContent,
+    MatSidenav,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+  ],
+  selector: 'yamg-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyApp {
+export class AppComponent {
+  public readonly yamgConfig = inject(YamgConfigService);
+  public readonly store = inject(YamgGameService);
 
-  @ViewChild(Nav) nav: Nav;
-  // rootPage:any = HomePage;
-  pages: Array<{ title: string, component: any }>;
+  private authEffect = effect(() => {
+    console.log(`authEffect: ${this.store.isAuth()}`);
+  });
 
-  constructor(public platform: Platform,public statusBar: StatusBar,public splashScreen: SplashScreen,public menu: MenuController,public gameBoard: GameService) {
-
-    // set our app's pages to be displaied in the Menu
-    this.pages = [
-      {title: 'Games',  component: 'HomePage'  },
-      {title: 'Scores', component: 'ScoresPage'},
-      {title: 'Help',   component: 'HelpPage'  }
-      ];
-
-    this.initializeApp();
+  menuIcon(menu: YamgMainMenuPage): string {
+    switch (menu.icon) {
+      case 'login':
+      case 'logout':
+        return this.store.isAuth() ? 'logout' : 'login';
+      default:
+        return menu.icon;
+    }
   }
-
-  /** ******************************************************************************************************************
-   *
-   */
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.hide();
-      this.splashScreen.hide();
-      this.gameBoard.recalcBoard(this.platform);
-      this.nav.setRoot('HomePage');
-      });
-
-    this.platform.resize.subscribe(() => {
-
-      // Cordova app comes out from the background.
-      if (this.gameBoard.recalcBoard(this.platform))
-        this.restartGame();
-      else
-        this.menu.close();
-
-    });
+  menuCaption(menu: YamgMainMenuPage): string {
+    switch (menu.icon) {
+      case 'login':
+      case 'logout':
+        return this.store.isAuth() ? 'logout' : 'login';
+      default:
+        return menu.caption;
+    }
   }
-
-  /** ******************************************************************************************************************
-   *
-   * @param page
-   */
-  openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
-  }
-
-  /** ******************************************************************************************************************
-   *
-   */
-  restartGame() {
-    console.log('restartGame');
-    this.nav.popToRoot({});
-  }
-
 }
-

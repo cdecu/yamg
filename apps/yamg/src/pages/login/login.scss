@@ -1,0 +1,25 @@
+.container {
+  padding: 1rem;
+  .login-box {
+    justify-content: center;
+    border: var(--mat-sys-outline-variant) 1px solid;
+    display: grid;
+    gap: 1rem;
+    mat-card-header {
+      margin: auto;
+    }
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      gap: 1rem;
+    }
+    mat-card-actions {
+      display: flex;
+      gap: 1rem;
+      * {
+        flex: 1;
+      }
+    }
+  }
+}

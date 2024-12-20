@@ -1,0 +1,34 @@
+<mat-toolbar class="yamg-title" color="primary">
+  <button class="yamg-title-hamburger" mat-icon-button aria-label="Menu icon" (click)="sidenav.toggle()">
+    <mat-icon [fontIcon]="sidenav.opened ? 'menu_open' : 'menu'"></mat-icon>
+  </button>
+  @if (store.isAuth()) {
+    @let user = store.user();
+    <h1 class="yamg-title-header" (click)="sidenav.toggle()">Hello {{ user.name }}, let's play!</h1>
+  } @else {
+    <h1 class="yamg-title-header" (click)="sidenav.toggle()">
+      {{ yamgConfig.title }}
+    </h1>
+  }
+  @if (store.gameStarted()) {
+    <div class="yamg-score">{{ store.remainingMatches() }}</div>
+    <div class="yamg-countdown">{{ store.countDown() }}</div>
+  }
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav class="yamg-sidenav" #sidenav mode="over" (click)="sidenav.close()">
+    <div class="yamg-sidenav-menu">
+      @for (page of yamgConfig.mainMenuPages; track page) {
+        <a mat-button [routerLink]="page.url">
+          <mat-icon>{{ menuIcon(page) }}</mat-icon>
+          {{ menuCaption(page) }}
+        </a>
+      }
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="yamg-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,18 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-
-
-@IonicPage()
 @Component({
-  selector: 'scores-page',
-  templateUrl: 'scores.html'
+  selector: 'yamg-scores',
+  imports: [],
+  templateUrl: './scores.html',
+  styleUrl: './scores.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScoresPage {
-  selectedItem: any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-  }
-}
+export class ScoresPageComponent {}

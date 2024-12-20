@@ -1,0 +1,38 @@
+<form class="container" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-card class="login-box">
+    <mat-card-header>Please Login</mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="username"
+          formControlName="email"
+          required
+        />
+        <mat-error>Invalid email format</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          formControlName="password"
+          required
+        />
+        <mat-error>Password is required</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">Login</button>
+      <button type="reset" mat-raised-button color="primary">Reset</button>
+      <button type="button" mat-raised-button color="primary" routerLink="/home">Back</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
