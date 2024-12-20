@@ -10,7 +10,7 @@
     gap: 0.5rem;
     z-index: 2;
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto auto auto;
     .yamg-title-hamburger {
       //border: #c3002f 1px solid;
     }
@@ -22,6 +22,10 @@
     }
     .yamg-countdown {
       border: #c3002f 1px solid;
+    }
+    .yamg-new-game {
+      //padding-right: -10px;
+      //margin-top: 10px;
     }
   }
 

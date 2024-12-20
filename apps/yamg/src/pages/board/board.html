@@ -1,5 +1,5 @@
 <mat-grid-list class="board" [cols]="yamgGame.yamgSize.cols" rowHeight="fit">
-  @for (tile of yamgGame.store.entities(); track tile.id) {
+  @for (tile of store.entities(); track tile.id) {
   <mat-grid-tile class="board-tile">
     <yamg-board-tile [tile]="tile"></yamg-board-tile>
   </mat-grid-tile>

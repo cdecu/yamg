@@ -7,13 +7,13 @@ import {
   MaybeAsync,
   RouterStateSnapshot,
 } from '@angular/router';
-import { YamgGameService } from './yamg-game.service';
+import { GameStore } from '../../interfaces/GameStore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class YamgRouteGuard implements CanActivate {
-  public readonly store = inject(YamgGameService);
+  public readonly store = inject(GameStore);
   private readonly router = inject(Router);
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
@@ -29,7 +29,7 @@ export class YamgRouteGuard implements CanActivate {
       case '/login':
       case '/logout':
         console.log('YamgRouteGuard>logout', route, state);
-        this.store.logout();
+        this.store.logOff();
         return this.router.navigate(['/home']);
     }
 

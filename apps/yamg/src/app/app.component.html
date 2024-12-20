@@ -13,6 +13,10 @@
   @if (store.gameStarted()) {
     <div class="yamg-score">{{ store.remainingMatches() }}</div>
     <div class="yamg-countdown">{{ store.countDown() }}</div>
+  } @else if (store.isAuth()) {
+    <button class="yamg-new-game" mat-mini-fab aria-label="New Game" (click)="restart()">
+      <mat-icon fontIcon="restart_alt"></mat-icon>
+    </button>
   }
 </mat-toolbar>
 

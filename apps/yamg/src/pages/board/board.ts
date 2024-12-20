@@ -4,6 +4,7 @@ import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { YamgConfigService } from '../../app/yamg-config';
 import { BoardTileComponent } from './board-tile';
 import { YamgGameService } from '../../app/yamg-game.service';
+import { GameStore } from '../../../interfaces/GameStore';
 
 @Component({
   imports: [MatGridList, MatGridTile, BoardTileComponent],
@@ -15,6 +16,7 @@ export class BoardPageComponent {
   private readonly router = inject(Router);
   public readonly yamgConfig = inject(YamgConfigService);
   public readonly yamgGame = inject(YamgGameService);
+  public readonly store = inject(GameStore);
 
   constructor() {
     const nav = this.router.getCurrentNavigation();

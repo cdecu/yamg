@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
-import { YamgConfigService, YamgMainMenuPage } from './yamg-config';
 import { MatDividerModule } from '@angular/material/divider';
+import { YamgConfigService, YamgMainMenuPage } from './yamg-config';
+import { GameStore } from '../../interfaces/GameStore';
 import { YamgGameService } from './yamg-game.service';
 
 @Component({
@@ -27,11 +28,8 @@ import { YamgGameService } from './yamg-game.service';
 })
 export class AppComponent {
   public readonly yamgConfig = inject(YamgConfigService);
-  public readonly store = inject(YamgGameService);
-
-  private authEffect = effect(() => {
-    console.log(`authEffect: ${this.store.isAuth()}`);
-  });
+  public readonly yamgGame = inject(YamgGameService);
+  public readonly store = inject(GameStore);
 
   menuIcon(menu: YamgMainMenuPage): string {
     switch (menu.icon) {
@@ -50,5 +48,9 @@ export class AppComponent {
       default:
         return menu.caption;
     }
+  }
+
+  restart() {
+    this.yamgGame.restartGame();
   }
 }

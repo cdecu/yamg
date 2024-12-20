@@ -23,7 +23,7 @@ export class YamgConfigService implements OnDestroy {
   private readonly platform = inject(PLATFORM_ID);
   private _dummy$?: Observable<{ width: number; height: number }> = undefined;
   public readonly title = appTitle;
-  public readonly gameTimeSpanSec = 30 * 60;
+  public readonly gameTimeSpanSec = 75;
   public readonly pickTimeSpanSec = 5;
   public readonly yamgSize = signal(InitialYamgSize);
 
@@ -82,7 +82,7 @@ export class YamgConfigService implements OnDestroy {
         break;
     }
 
-    // this.shuffleTiles(tiles);
+    // YamgConfigService.shuffleTiles(tiles);
     return tiles;
   }
 
@@ -102,7 +102,7 @@ export class YamgConfigService implements OnDestroy {
     }
   }
 
-  private shuffleTiles(tiles: GameTile[]) {
+  static shuffleTiles(tiles: GameTile[]) {
     for (let i = tiles.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = tiles[i];

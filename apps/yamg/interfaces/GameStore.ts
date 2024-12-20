@@ -1,28 +1,41 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
-import { initialGameState } from './GameState';
+import { initialGameState, newGameState } from './GameState';
 import { computed } from '@angular/core';
 import { setAllEntities, updateAllEntities, withEntities } from '@ngrx/signals/entities';
 import { GameTile, YamgSize } from './GameTile';
+import { YamgConfigService } from '../src/app/yamg-config';
+import { User } from './User';
 
 export const GameStore = signalStore(
   { providedIn: 'root' },
   withState(initialGameState),
   withEntities<GameTile>(),
   withComputed((store) => ({
+    isAuth: computed(() => store.user().id !== null),
     gameStarted: computed(() => store.started() !== 0),
     gameOver: computed(() => store.started() === 0),
     gameCountDown: computed(() => store.countDown()),
     remainingMatches: computed(() => store.tilesCount() / 2 - store.matchesCount()),
   })),
   withMethods((store) => ({
+    logIn(user: User) {
+      console.log('GameStore. logIn', user);
+      patchState(store, { user: user });
+    },
+    logOff() {
+      console.log('GameStore. logOff');
+      patchState(store, { user: { id: null } });
+    },
+
     startGame(selectedGame: string, yamgSize: YamgSize, tiles: GameTile[]) {
       console.log('GameStore. Start Game', selectedGame, yamgSize, tiles);
-      patchState(
-        store,
-        initialGameState,
-        { name: selectedGame, tilesCount: yamgSize.tilesCount, started: 1 },
-        setAllEntities(tiles),
-      );
+      patchState(store, newGameState, { name: selectedGame, tilesCount: yamgSize.tilesCount }, setAllEntities(tiles));
+    },
+    restartGame() {
+      console.log('GameStore. ReStart Game');
+      const tiles = store.entities().map((t) => ({ ...t, flipped: false, matched: false }));
+      YamgConfigService.shuffleTiles(tiles);
+      patchState(store, newGameState, setAllEntities(tiles));
     },
     stopGame() {
       console.log('GameStore. Stop Game', store.name());
@@ -32,6 +45,7 @@ export const GameStore = signalStore(
       console.log('GameStore. Win Game', store.name());
       patchState(store, { started: 0 }, updateAllEntities({ flipped: true, matched: true }));
     },
+
     clickFirstTile(firstPick: GameTile) {
       // console.log('GameStore. Click Tile');
       patchState(

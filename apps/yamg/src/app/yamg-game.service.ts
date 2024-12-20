@@ -1,20 +1,16 @@
-import { computed, inject, Injectable, OnDestroy, signal } from '@angular/core';
-import { User } from '../../interfaces/User';
+import { inject, Injectable, OnDestroy } from '@angular/core';
+import { interval, Subscription, takeWhile } from 'rxjs';
 import { GameTile, InitialYamgSize, YamgSize } from '../../interfaces/GameTile';
 import { GameStore } from '../../interfaces/GameStore';
-import { interval, Subscription, takeWhile } from 'rxjs';
 import { YamgConfigService } from './yamg-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class YamgGameService implements OnDestroy {
-  public readonly user = signal<User>({ id: null });
-  public readonly isAuth = computed<boolean>(() => this.user().id !== null);
-
+  public yamgSize = InitialYamgSize;
   public readonly yamgConfig = inject(YamgConfigService);
   public readonly store = inject(GameStore);
-  public yamgSize = InitialYamgSize;
 
   private gameTimer$?: Subscription = undefined;
   private gameTimeSpanSec = 5;
@@ -25,30 +21,14 @@ export class YamgGameService implements OnDestroy {
   private firstPick?: GameTile = undefined;
   private secondPick?: GameTile = undefined;
 
-  public readonly gameStarted = computed<boolean>(() => this.store.gameStarted());
-  public readonly gameOver = computed<boolean>(() => this.store.gameOver());
-  public readonly countDown = computed<string>(() => this.store.gameCountDown());
-  public readonly remainingMatches = computed<number>(() => this.store.remainingMatches());
-
   constructor() {
-    console.log('>YamgStoreService Hello.');
+    console.log('YamgStoreService Hello.');
   }
 
   ngOnDestroy() {
-    console.log('>YamgStoreService Destroy.');
+    console.log('YamgStoreService Destroy.');
     this.stopGameTimer();
   }
-
-  //region ** Auth User
-  //** Auth User */
-  login(user: User) {
-    this.user.set(user);
-  }
-  logout() {
-    this.user.set({ id: null });
-    this.stopGame();
-  }
-  //endregion
 
   //region ** Game Start , Stop, ...
   /**
@@ -64,6 +44,12 @@ export class YamgGameService implements OnDestroy {
     this.clearPickedTiles();
     this.yamgSize = yamgSize;
     this.store.startGame(selectedGame, yamgSize, this.yamgConfig.buildTiles(selectedGame, yamgSize));
+  }
+  restartGame() {
+    console.log('YamgStoreService. Restart Game');
+    this.stopGameTimer();
+    this.clearPickedTiles();
+    this.store.restartGame();
   }
   stopGame() {
     console.log('YamgStoreService. Stop Game');
@@ -99,16 +85,16 @@ export class YamgGameService implements OnDestroy {
     this.secondPick = tile;
     if (this.firstPick.key === this.secondPick.key) {
       console.log('Second pick is matched !');
-      if (this.store.remainingMatches() === 1) {
-        console.log('Game Win ');
-        this.clearPickedTiles();
-        this.stopGameTimer();
-        this.store.winGame();
-        return;
-      }
-      this.store.matchTiles(this.firstPick, this.secondPick);
+      // if (this.store.remainingMatches() === 1) {
+      console.log('Game Win ');
       this.clearPickedTiles();
+      this.stopGameTimer();
+      this.store.winGame();
       return;
+      // }
+      // this.store.matchTiles(this.firstPick, this.secondPick);
+      // this.clearPickedTiles();
+      // return;
     }
 
     console.log('Second pick is mismatched !', this.firstPick, 'mismatched', this.secondPick);
