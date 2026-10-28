@@ -119,6 +119,9 @@ export const GameStore = signalStore(
       logOff() {
         patchState(store, { user: { id: null } });
       },
+      setShowNames(showNames: boolean) {
+        patchState(store, { showNames });
+      },
       async startGame(selectedGame: string, yamgSize: YamgSize) {
         const requestId = ++startRequestId;
         clearTimer();

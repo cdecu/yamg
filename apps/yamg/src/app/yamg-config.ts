@@ -4,6 +4,7 @@ export interface YamgMainMenuPage {
   icon: string;
   caption: string;
   url: string;
+  action?: 'auth' | 'showNames';
 }
 
 export interface YamgGameDef {
@@ -20,8 +21,9 @@ export const pickTimeSpanSec = 5;
 export const mainMenuPages: YamgMainMenuPage[] = [
   { caption: 'Games', icon: 'home', url: '/home' },
   { caption: 'Scores', icon: 'scoreboard', url: '/scores' },
+  { caption: 'Show names', icon: 'label', url: '', action: 'showNames' },
   { caption: 'Help', icon: 'help', url: '/help' },
-  { caption: 'logOff', icon: 'logout', url: '' },
+  { caption: 'logOff', icon: 'logout', url: '', action: 'auth' },
 ];
 
 export const games: YamgGameDef[] = [

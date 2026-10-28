@@ -15,6 +15,7 @@ export type GameState = {
   secondPickId: EntityId | null;
   pickEndTime: number;
   gameEndTime: number;
+  showNames: boolean;
 };
 
 export const initialGameState: GameState = {
@@ -30,6 +31,7 @@ export const initialGameState: GameState = {
   secondPickId: null,
   pickEndTime: 0,
   gameEndTime: 0,
+  showNames: false,
 };
 
 export const newGameState: Partial<GameState> = {

@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { YamgMainMenuPage, mainMenuPages, title } from './yamg-config';
 import { GameStore } from './store/game.store';
 import { YamgAuthService } from './yamg-auth';
@@ -23,6 +24,7 @@ import { filter, map } from 'rxjs';
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    MatCheckbox,
   ],
   selector: 'yamg-root',
   templateUrl: './app.html',
@@ -44,11 +46,11 @@ export class AppComponent {
   );
 
   menuIcon(menu: YamgMainMenuPage): string {
-    return menu.icon === 'logout' && !this.store.isAuth() ? 'login' : menu.icon;
+    return menu.action === 'auth' && !this.store.isAuth() ? 'login' : menu.icon;
   }
 
   menuCaption(menu: YamgMainMenuPage): string {
-    return menu.icon === 'logout' && !this.store.isAuth() ? 'login' : menu.caption;
+    return menu.action === 'auth' && !this.store.isAuth() ? 'login' : menu.caption;
   }
 
   authAction(): void {

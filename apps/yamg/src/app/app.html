@@ -24,7 +24,16 @@
 <mat-sidenav-container>
   <mat-sidenav class="yamg-sidenav" #sidenav mode="over" (click)="sidenav.close()">
     <div class="yamg-sidenav-menu">
-      @for (page of mainMenuPages; track page.url) { @if (page.icon === 'logout') {
+      @for (page of mainMenuPages; track page.caption) { @if (page.action === 'showNames') {
+      <mat-checkbox
+        class="yamg-sidenav-checkbox"
+        [checked]="store.showNames()"
+        (change)="store.setShowNames($event.checked)"
+        (click)="$event.stopPropagation()"
+      >
+        {{ page.caption }}
+      </mat-checkbox>
+      } @else if (page.action === 'auth') {
       <button mat-button (click)="authAction()">
         <mat-icon>{{ menuIcon(page) }}</mat-icon>
         {{ menuCaption(page) }}

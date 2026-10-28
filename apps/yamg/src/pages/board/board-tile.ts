@@ -19,6 +19,9 @@ export class BoardTileComponent {
   public readonly fontFamily = computed(
     () => games.find((game) => game.id === this.store.name())?.fontFamily ?? null,
   );
+  public readonly showName = computed(
+    () => this.store.showNames() && this.store.name() !== 'numbers' && !!this.tile().name,
+  );
 
   public Toggle(): void {
     this.store.clickTile(this.tile());

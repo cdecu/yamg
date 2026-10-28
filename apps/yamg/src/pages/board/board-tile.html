@@ -5,6 +5,9 @@
       <div class="tile-text" [style.font-family]="fontFamily()" [title]="tile().name">
         {{tile().frontText}}
       </div>
+      @if (showName()) {
+      <div class="tile-name">{{ tile().name }}</div>
+      }
     </div>
   </div>
 </div>

@@ -34,6 +34,8 @@
       backface-visibility: hidden;
       border: ridge silver;
       display: flex;
+      flex-direction: column;
+      overflow: hidden;
       .tile-text {
         font-size: 1.5rem;
         font-weight: bold;
@@ -41,11 +43,21 @@
         align-self: center;
         user-select: none;
       }
+      .tile-name {
+        font-size: 0.7rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 2px 2px;
+        user-select: none;
+      }
     }
 
     /* Style the front side */
     .flip-card-front {
-      background: #1802f8 url('/yamg.svg') no-repeat center;
+      /* Relative to <base href> so it also works under the GitHub Pages /yamg/ base */
+      background: #1802f8 url('yamg.svg') no-repeat center;
       color: black;
     }
 
