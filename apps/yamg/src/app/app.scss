@@ -39,12 +39,14 @@
     .yamg-sidenav {
       border-right: var(--mat-sys-outline-variant) 1px solid;
       min-width: 25vw;
-      width: fit-content;
+      width: max-content;
+      max-width: 90vw;
       .yamg-sidenav-menu {
         display: flex;
         flex-direction: column;
-        height: 100pc;
+        padding: 0.5rem 1rem 0.5rem 0;
         gap: 0.5rem;
+        white-space: nowrap;
         a,
         button {
           justify-content: left;
