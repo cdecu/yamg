@@ -35,8 +35,6 @@ export const GameStore = signalStore(
   withComputed((store) => ({
     isAuth: computed(() => store.user().id !== null),
     gameStarted: computed(() => store.started() !== 0),
-    gameOver: computed(() => store.started() === 0),
-    gameCountDown: computed(() => store.countDown()),
     remainingMatches: computed(() => store.tilesCount() / 2 - store.matchesCount()),
   })),
   withMethods((store) => {
@@ -133,7 +131,7 @@ export const GameStore = signalStore(
         patchState(
           store,
           newGameState,
-          { name: activeGame, tilesCount: yamgSize.tilesCount, yamgSize },
+          { name: activeGame, tilesCount: yamgSize.tilesCount },
           setAllEntities(tiles),
         );
       },

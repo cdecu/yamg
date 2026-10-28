@@ -3,10 +3,6 @@ import { GameTile } from '../../app/models/game-tile';
 import { GameStore } from '../../app/store/game.store';
 import { games } from '../../app/yamg-config';
 
-/* *********************************************************************************************************************
-  flip flap game board tile
- see https://angular.io/docs/ts/latest/guide/animations.html#!#states-and-transitions
-*/
 @Component({
   selector: 'yamg-board-tile',
   templateUrl: './board-tile.html',

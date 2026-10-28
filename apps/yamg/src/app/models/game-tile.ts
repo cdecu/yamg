@@ -1,7 +1,6 @@
 import { EntityId } from '@ngrx/signals/entities';
 
 export type YamgSize = { rows: number; cols: number; tilesCount: number };
-export const InitialYamgSize: YamgSize = { rows: 8, cols: 6, tilesCount: 48 };
 
 export type GameTile = {
   id: EntityId;

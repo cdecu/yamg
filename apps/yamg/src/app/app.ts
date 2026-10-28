@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIcon } from '@angular/material/icon';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { YamgMainMenuPage, mainMenuPages, title } from './yamg-config';
 import { GameStore } from './store/game.store';
@@ -22,8 +21,6 @@ import { filter, map } from 'rxjs';
     MatSidenavContent,
     MatSidenav,
     MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
     MatCheckbox,
   ],
   selector: 'yamg-root',

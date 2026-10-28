@@ -41,7 +41,6 @@ export class LoginPageComponent {
   constructor() {
     const state = this.router.currentNavigation()?.extras?.state;
     this.nextUrl = state?.['url'] || '/home';
-    this.nextUrl = this.nextUrl === '/logout' ? '/home' : this.nextUrl;
   }
 
   onSubmit() {
@@ -55,7 +54,6 @@ export class LoginPageComponent {
       this.snackBar.open(res, 'Close', { duration: 3000 });
       return;
     }
-    console.log('Login successful. NextUrl', this.nextUrl);
     void this.router.navigateByUrl(this.nextUrl);
   }
 }

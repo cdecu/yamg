@@ -1,5 +1,4 @@
 import { EntityId } from '@ngrx/signals/entities';
-import { InitialYamgSize, YamgSize } from './game-tile';
 import { User } from './user';
 
 export type GameState = {
@@ -10,7 +9,6 @@ export type GameState = {
   moveCount: number;
   matchesCount: number;
   countDown: string;
-  yamgSize: YamgSize;
   firstPickId: EntityId | null;
   secondPickId: EntityId | null;
   pickEndTime: number;
@@ -22,11 +20,10 @@ export const initialGameState: GameState = {
   user: { id: null },
   name: 'numbers',
   started: 0,
-  tilesCount: InitialYamgSize.tilesCount,
+  tilesCount: 0,
   moveCount: 0,
   matchesCount: 0,
   countDown: '-:--',
-  yamgSize: InitialYamgSize,
   firstPickId: null,
   secondPickId: null,
   pickEndTime: 0,

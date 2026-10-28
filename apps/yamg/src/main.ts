@@ -1,4 +1,3 @@
-import '@angular/material/prebuilt-themes/azure-blue.css';
 import './styles.scss';
 
 import { bootstrapApplication } from '@angular/platform-browser';

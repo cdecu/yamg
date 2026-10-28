@@ -13,11 +13,7 @@
     z-index: 2;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto auto auto;
-    .yamg-title-hamburger {
-      //border: #c3002f 1px solid;
-    }
     .yamg-title-header {
-      //border: #c3002f 1px solid;
       min-width: 0;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -28,10 +24,6 @@
     }
     .yamg-countdown {
       border: #c3002f 1px solid;
-    }
-    .yamg-new-game {
-      //padding-right: -10px;
-      //margin-top: 10px;
     }
   }
 
