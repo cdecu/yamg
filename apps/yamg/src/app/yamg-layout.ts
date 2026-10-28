@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { fromEvent, map } from 'rxjs';
+import { fromEvent, map, merge } from 'rxjs';
 import { YamgSize } from './models/game-tile';
 
 function calculateYamgSize(width: number, height: number): YamgSize {
@@ -13,9 +13,19 @@ function calculateYamgSize(width: number, height: number): YamgSize {
 @Injectable({ providedIn: 'root' })
 export class YamgLayoutService {
   readonly yamgSize = toSignal(
-    fromEvent(window, 'resize').pipe(
-      map(() => calculateYamgSize(window.innerWidth, window.innerHeight)),
+    merge(fromEvent(window, 'resize'), fromEvent(window, 'orientationchange')).pipe(
+      map(() =>
+        calculateYamgSize(
+          document.documentElement.clientWidth,
+          document.documentElement.clientHeight,
+        ),
+      ),
     ),
-    { initialValue: calculateYamgSize(window.innerWidth, window.innerHeight) },
+    {
+      initialValue: calculateYamgSize(
+        document.documentElement.clientWidth,
+        document.documentElement.clientHeight,
+      ),
+    },
   );
 }

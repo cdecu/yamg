@@ -1,5 +1,7 @@
 :host {
   display: grid;
+  width: 100%;
+  min-width: 0;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   user-select: none;
@@ -10,12 +12,16 @@
     gap: 0.5rem;
     z-index: 2;
     display: grid;
-    grid-template-columns: auto 1fr auto auto auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto auto;
     .yamg-title-hamburger {
       //border: #c3002f 1px solid;
     }
     .yamg-title-header {
       //border: #c3002f 1px solid;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .yamg-score {
       border: #c3002f 1px solid;
