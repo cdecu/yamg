@@ -1,5 +1,4 @@
 import '@angular/material/prebuilt-themes/azure-blue.css';
-import 'prismjs/themes/prism-okaidia.css';
 import './styles.scss';
 
 import { bootstrapApplication } from '@angular/platform-browser';

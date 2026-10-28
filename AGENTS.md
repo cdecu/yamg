@@ -69,7 +69,8 @@ There are no unit or e2e tests in this project.
 - Standalone components only, no NgModules. Use `inject()`, signals, `effect`/`computed`, and `ChangeDetectionStrategy.OnPush`.
 - Do not reintroduce `zone.js`, SSR (`@angular/ssr`, `platform-server`, `server.ts`), ESLint or Prettier.
 - Component selector prefix: `yamg`. Page components are named `<Name>PageComponent` and live in `src/pages/<name>/`.
-- Global styles and side-effect imports (Material theme, Prism) go in `src/main.ts`, not in a builder `styles`/`scripts` array.
+- Global styles (Material theme, `styles.scss`) go in `src/main.ts`, not in a builder `styles`/`scripts` array.
+- Help-only dependencies stay lazy: `provideMarkdown()` is in the route providers of `src/pages/help/help.routes.ts`, and Prism (scripts + theme) is imported in `help.ts`.
 - Static files go in `apps/yamg/public/`; data files fetched at runtime use paths relative to the base URL so the app also works on GitHub Pages.
 - Add dependencies with `vp install <pkg>` (or `-D`). Keep Angular packages aligned on the same `~22.x` version and keep the `vite` override pointing to `@voidzero-dev/vite-plus-core`.
 - Keep the Tauri CLI (`@tauri-apps/cli`) and the Rust crates (`tauri`, `tauri-build`, `tauri-plugin-log`) on major version 2.

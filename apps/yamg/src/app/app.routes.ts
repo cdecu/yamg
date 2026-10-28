@@ -19,7 +19,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'help',
-    loadComponent: () => import('../pages/help/help').then((module) => module.HelpPageComponent),
+    loadChildren: () => import('../pages/help/help.routes').then((module) => module.helpRoutes),
   },
   {
     path: 'home',
