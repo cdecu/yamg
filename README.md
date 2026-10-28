@@ -80,7 +80,7 @@ vp exec tauri android dev --open
 
 ## GitHub Pages
 
-The site is published to <https://cdecu.github.io/yamg/> by the GitHub Actions workflow in `.github/workflows/pages.yml` when changes are pushed to `main`. You can also start a deployment manually from the Actions tab. The workflow builds the SPA with the `/yamg/` base path and copies `index.html` to `404.html` so Angular can handle direct links and page refreshes.
+The site is published to <https://cdecu.github.io/yamg/> by the GitHub Actions workflow in `.github/workflows/pages.yml` when changes are pushed to `master`. You can also start a deployment manually from the Actions tab. The workflow builds the SPA with the `/yamg/` base path and copies `index.html` to `404.html` so Angular can handle direct links and page refreshes.
 
 To enable publishing, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions** in the repository settings. To build the Pages version locally:
 
