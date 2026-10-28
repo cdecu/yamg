@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { GameStore } from '../../interfaces/GameStore';
+import { GameStore } from './store/game.store';
 
 @Injectable({
   providedIn: 'root',

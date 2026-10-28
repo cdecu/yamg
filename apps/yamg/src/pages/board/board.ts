@@ -1,10 +1,15 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  effect,
+  inject,
+  input,
+} from '@angular/core';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
-import { YamgConfigService } from '../../app/yamg-config';
 import { BoardTileComponent } from './board-tile';
-import { YamgGameService } from '../../app/yamg-game.service';
-import { GameStore } from '../../../interfaces/GameStore';
+import { GameStore } from '../../app/store/game.store';
+import { YamgLayoutService } from '../../app/yamg-layout';
 
 @Component({
   imports: [MatGridList, MatGridTile, BoardTileComponent],
@@ -13,18 +18,15 @@ import { GameStore } from '../../../interfaces/GameStore';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardPageComponent {
-  private readonly router = inject(Router);
-  public readonly yamgConfig = inject(YamgConfigService);
-  public readonly yamgGame = inject(YamgGameService);
   public readonly store = inject(GameStore);
+  public readonly yamgLayout = inject(YamgLayoutService);
+  public readonly game = input<string | undefined>();
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
-    const nav = this.router.getCurrentNavigation();
-    const selectedGame: string = nav?.finalUrl?.queryParams?.['game'] || 'numbers';
+    this.destroyRef.onDestroy(() => this.store.leaveGame());
     effect(() => {
-      const yamgSize = this.yamgConfig.yamgSize();
-      console.log('BoardPageComponent. Start Game', selectedGame, yamgSize);
-      this.yamgGame.startGame(selectedGame, yamgSize);
+      this.store.startGame(this.game() || 'numbers', this.yamgLayout.yamgSize());
     });
   }
 }

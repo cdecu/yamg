@@ -1,8 +1,10 @@
 <div class="flip-card">
-  <div class="flip-card-inner" (click)="Toggle()">
-    <div [ngClass]="flipFlapClasses('front')" [@flip-flap]="flipFlapState('front')"></div>
-    <div [ngClass]="flipFlapClasses('back')" [@flip-flap]="flipFlapState('back')">
-      <div class="tile-text">{{tile().frontText}}</div>
+  <div class="flip-card-inner" [class.flipped]="tile().flipped" (click)="Toggle()">
+    <div class="flip-card-front"></div>
+    <div class="flip-card-back" [class.matched]="tile().matched">
+      <div class="tile-text" [style.font-family]="fontFamily()" [title]="tile().name">
+        {{tile().frontText}}
+      </div>
     </div>
   </div>
 </div>

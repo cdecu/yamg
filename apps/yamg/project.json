@@ -7,90 +7,49 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/apps/yamg/browser"],
       "options": {
-        "outputPath": "dist/apps/yamg",
-        "index": "apps/yamg/src/index.html",
-        "browser": "apps/yamg/src/main.ts",
-        "polyfills": [],
-        "tsConfig": "apps/yamg/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/yamg/public"
-          }
-        ],
-        "styles": [
-          "@angular/material/prebuilt-themes/azure-blue.css",
-          "node_modules/prismjs/themes/prism-okaidia.css",
-          "apps/yamg/src/styles.scss"
-        ],
-        "scripts": [
-          "node_modules/prismjs/prism.js",
-          "node_modules/prismjs/components/prism-sql.min.js"
-        ],
-        "server": "apps/yamg/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/yamg/src/server.ts"
-        },
-        "prerender": {
-          "discoverRoutes": true,
-          "routesFile": ""
-        }
-      },
-      "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
-            }
-          ],
-          "outputHashing": "all"
-        },
-        "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "configurations": {
-        "production": {
-          "buildTarget": "yamg:build:production"
-        },
-        "development": {
-          "buildTarget": "yamg:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "yamg:build"
+        "command": "vp build",
+        "cwd": "apps/yamg"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
+    "serve": {
+      "executor": "nx:run-commands",
+      "continuous": true,
       "options": {
-        "buildTarget": "yamg:build",
-        "staticFilePath": "dist/apps/yamg/browser",
-        "spa": true
+        "command": "vp dev",
+        "cwd": "apps/yamg"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "dependsOn": ["build"],
+      "options": {
+        "command": "vp preview",
+        "cwd": "apps/yamg"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vp run typecheck"
+      }
+    },
+    "tauri-dev": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "options": {
+        "command": "vp exec tauri dev",
+        "cwd": "apps/yamg"
+      }
+    },
+    "tauri-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vp exec tauri build",
+        "cwd": "apps/yamg"
       }
     }
   }

@@ -1,77 +1,92 @@
 # Yamg
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Yet Another Memory Game, built with Angular and Nx and powered by [Vite+](https://viteplus.dev).
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Requirements
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-
-## Finish your CI setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/b3nxxWYlla)
-
-
-## Run tasks
-
-To run tasks with Nx use:
+- Node.js 22.18+, 24.11+, or 26+
+- Vite+ CLI (`vp`), installed globally:
 
 ```sh
-npx nx <target> <project-name>
+npm install -g vite-plus
 ```
 
-For example:
+Without a global install, prefix the commands below with `npx` (for example `npx vp dev`): `vite-plus` is a dev dependency of the workspace.
+
+## Install
 
 ```sh
-npx nx build myproject
+vp install
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
-```
-
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
+## Development
 
 ```sh
-# Generate an app
-npx nx g @nx/react:app demo
-
-# Generate a library
-npx nx g @nx/react:lib some-lib
+vp dev
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+The Vite development server is available at <http://localhost:5173>.
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Build
 
+```sh
+vp build
+```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+The static SPA is written to `dist/apps/yamg/browser`. To serve the production build locally (<http://localhost:4173>):
 
-## Install Nx Console
+```sh
+vp preview
+```
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+## Checks
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```sh
+vp check
+vp lint
+vp fmt
+vp run typecheck
+```
 
-## Useful links
+- `vp check` runs format and lint checks (Oxfmt + Oxlint).
+- `vp lint` / `vp fmt` run the linter and the formatter on their own (`vp fmt` rewrites files).
+- `vp run typecheck` runs the Angular application TypeScript project without emitting files.
 
-Learn more:
+## Nx
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+The Nx targets of the `yamg` project delegate to Vite+ (`vp build`, `vp dev`, `vp preview`):
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```sh
+vp exec nx build yamg
+vp exec nx serve yamg
+vp exec nx preview yamg
+vp exec nx typecheck yamg
+vp exec nx tauri-dev yamg
+vp exec nx tauri-build yamg
+```
+
+## Desktop app
+
+The Tauri configuration uses the same Vite+ scripts for development (`npm run dev` → `vp dev`, on port 5173) and production builds (`npm run build` → `vp build`). Its frontend output is `dist/apps/yamg/browser`.
+
+The Tauri CLI (`@tauri-apps/cli` 2.x) is a dev dependency of the workspace, installed by `vp install`. From `apps/yamg`:
+
+```sh
+cd apps/yamg
+vp exec tauri dev
+vp exec tauri build
+vp exec tauri android dev --open
+```
+
+## GitHub Pages
+
+The site is published to <https://cdecu.github.io/yamg/> by the GitHub Actions workflow in `.github/workflows/pages.yml` when changes are pushed to `main`. You can also start a deployment manually from the Actions tab. The workflow builds the SPA with the `/yamg/` base path and copies `index.html` to `404.html` so Angular can handle direct links and page refreshes.
+
+To enable publishing, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions** in the repository settings. To build the Pages version locally:
+
+```sh
+YAMG_BASE=/yamg/ vp run build:pages
+YAMG_BASE=/yamg/ vp preview --port 4175 --outDir dist/apps/yamg/browser --base /yamg/
+```
+
+The normal `vp build` keeps the `/` base path used for local development and Tauri.

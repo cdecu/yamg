@@ -2,35 +2,29 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": [
-      "default",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.js"
-    ],
-    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
+    "production": ["default"],
+    "sharedGlobals": [
+      "{workspaceRoot}/.github/workflows/ci.yml",
+      "{workspaceRoot}/package.json",
+      "{workspaceRoot}/package-lock.json",
+      "{workspaceRoot}/tsconfig.base.json",
+      "{workspaceRoot}/vite.config.ts"
+    ]
   },
   "targetDefaults": {
-    "@angular-devkit/build-angular:application": {
+    "build": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
-    },
-    "@nx/eslint:lint": {
-      "cache": true,
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
-      ]
+      "inputs": ["production", "^production"],
+      "outputs": ["{workspaceRoot}/dist/apps/yamg/browser"]
     }
   },
   "generators": {
     "@nx/angular:application": {
       "e2eTestRunner": "none",
-      "linter": "eslint",
+      "linter": "none",
       "style": "scss",
       "unitTestRunner": "none"
     }
-  }
+  },
+  "analytics": false
 }

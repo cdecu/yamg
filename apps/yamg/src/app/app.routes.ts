@@ -1,37 +1,32 @@
-import { Route } from '@angular/router';
-import { HomePageComponent } from '../pages/home/home';
-import { BoardPageComponent } from '../pages/board/board';
-import { HelpPageComponent } from '../pages/help/help';
-import { ScoresPageComponent } from '../pages/scores/scores';
-import { LoginPageComponent } from '../pages/login/login';
-import { YamgRouteGuard } from './yamg-route.guard';
+import { Routes } from '@angular/router';
+import { authGuard } from './auth-guard.service';
 
-export const appRoutes: Route[] = [
+export const appRoutes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   {
     path: 'login',
-    component: LoginPageComponent,
+    loadComponent: () => import('../pages/login/login').then((module) => module.LoginPageComponent),
   },
   {
     path: 'board',
-    component: BoardPageComponent,
-    canActivate: [YamgRouteGuard],
+    loadComponent: () => import('../pages/board/board').then((module) => module.BoardPageComponent),
   },
   {
     path: 'scores',
-    component: ScoresPageComponent,
-    canActivate: [YamgRouteGuard],
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('../pages/scores/scores').then((module) => module.ScoresPageComponent),
   },
   {
     path: 'help',
-    component: HelpPageComponent,
+    loadComponent: () => import('../pages/help/help').then((module) => module.HelpPageComponent),
   },
   {
-    path: 'logout',
-    component: HomePageComponent,
-    canActivate: [YamgRouteGuard],
+    path: 'home',
+    loadComponent: () => import('../pages/home/home').then((module) => module.HomePageComponent),
   },
   {
     path: '**',
-    component: HomePageComponent,
+    redirectTo: 'home',
   },
 ];

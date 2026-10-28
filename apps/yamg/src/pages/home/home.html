@@ -1,4 +1,4 @@
-@for (game of yamgConfig.games; track game.id) {
+@for (game of games; track game.id) {
 <a mat-button routerLink="/board" [queryParams]="{'game':game.id}">
   <mat-icon>{{ game.icon }}</mat-icon>
   {{ game.title }}

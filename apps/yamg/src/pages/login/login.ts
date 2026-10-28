@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -28,21 +28,20 @@ import { YamgAuthService } from '../../app/yamg-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent {
-  readonly loginForm: FormGroup;
   private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
   private readonly auth = inject(YamgAuthService);
-  private readonly nextUrl: string = '/home';
+  private readonly formBuilder = inject(NonNullableFormBuilder);
+  readonly loginForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
+  private readonly nextUrl: string;
 
-  constructor(private formBuilder: FormBuilder) {
-    const nav = this.router.getCurrentNavigation();
-    const state = nav?.extras?.state;
+  constructor() {
+    const state = this.router.currentNavigation()?.extras?.state;
     this.nextUrl = state?.['url'] || '/home';
     this.nextUrl = this.nextUrl === '/logout' ? '/home' : this.nextUrl;
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
   }
 
   onSubmit() {
@@ -51,7 +50,7 @@ export class LoginPageComponent {
       return;
     }
 
-    const res = this.auth.login(this.loginForm.value);
+    const res = this.auth.login(this.loginForm.getRawValue());
     if (res !== true) {
       this.snackBar.open(res, 'Close', { duration: 3000 });
       return;

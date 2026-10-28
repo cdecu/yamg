@@ -1,5 +1,11 @@
 @use '@angular/material' as mat;
 
+@font-face {
+  font-family: 'NewGardinerSMP';
+  src: url('/fonts/NewGardinerSMP.woff2') format('woff2');
+  font-display: swap;
+}
+
 html {
   height: 100%;
 }

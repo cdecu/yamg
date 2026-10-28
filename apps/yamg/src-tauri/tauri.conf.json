@@ -1,13 +1,13 @@
 {
-  "$schema": "https://schema.tauri.app/config/2.0.0-rc",
+  "$schema": "https://schema.tauri.app/config/2",
   "productName": "Yamg App",
   "version": "0.1.0",
   "identifier": "com.yamg-app.cdecu",
   "build": {
     "frontendDist": "../../../dist/apps/yamg/browser",
-    "devUrl": "http://localhost:4200",
-    "beforeDevCommand": "nx run yamg:serve:development",
-    "beforeBuildCommand": "nx run yamg:build:production"
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
   },
   "app": {
     "windows": [
